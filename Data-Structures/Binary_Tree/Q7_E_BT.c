@@ -99,10 +99,16 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-
+#define INF 1e9
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+    if (node == NULL) return INF;
+
+    int smallL = smallestValue(node->left);
+    int smallR = smallestValue(node->right);
+
+    int smallC = smallL < smallR ? smallL : smallR;
+    return smallC < node->item ? smallC : node->item;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
