@@ -53,6 +53,7 @@ int main()
 	// Initialize the back linked list as an empty linked list
 	resultBackList.head = NULL;
 	resultBackList.size = 0;
+	c = 1;
 
 	printf("1: Insert an integer to the linked list:\n");
 	printf("2: Split the linked list into two linked lists, frontList and backList:\n");
@@ -102,7 +103,44 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	if (ll == NULL || resultFrontList == NULL || resultBackList == NULL){
+		return;
+	}
+
+	if (ll->head == NULL) {
+		resultFrontList->head = NULL;
+		resultFrontList->size = 0;
+		resultBackList->head = NULL;
+		resultBackList->size = 0;
+		return;
+	}
+
+	ListNode *slow = ll->head, *fast = ll->head;
+
+	while (fast->next != NULL && fast->next->next != NULL){
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+
+	resultFrontList->head = ll->head;
+	resultBackList->head = slow->next;
+	slow->next = NULL;
+
+	int frontSize = 0;
+	ListNode *tmp = resultFrontList->head;
+	while (tmp != NULL) {
+		frontSize++;
+    	tmp = tmp->next;
+	}
+
+	resultFrontList->size = frontSize;
+	resultBackList->size = ll->size - frontSize;
+
+	// Ownership of nodes is transferred to result lists after split.
+	ll->head = NULL;
+	ll->size = 0;
+
+	return;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
