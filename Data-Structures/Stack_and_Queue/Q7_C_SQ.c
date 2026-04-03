@@ -113,13 +113,32 @@ int balanced(char *expression)
 	while (c!='\0'){
 		if (c == '(' || c == '{' || c == '[') push(&s, c);
 		else{
+			if(isEmptyStack(&s)) return 1;
+
 			tmp = pop(&s);
-			if (tmp != c) return 1;
+			switch (tmp)
+			{
+			case '(':
+				if (c != ')') return 1;
+				break;
+			
+			case '{':
+				if (c != '}') return 1;
+				break;
+
+			case '[':
+				if (c != ']') return 1;
+				break;
+				
+			default:
+				return 1;
+			}
 		}
 		
 		c = expression[++i];
 	}
-	return 0;
+	if (isEmptyStack(&s)) return 0;
+	else return 1;
 }
 
 ////////////////////////////////////////////////////////////
