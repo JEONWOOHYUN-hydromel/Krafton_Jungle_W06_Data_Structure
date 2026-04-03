@@ -136,7 +136,6 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 	resultFrontList->size = frontSize;
 	resultBackList->size = ll->size - frontSize;
 
-	// Ownership of nodes is transferred to result lists after split.
 	ll->head = NULL;
 	ll->size = 0;
 
