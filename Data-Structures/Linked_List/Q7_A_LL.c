@@ -87,7 +87,15 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	if (*ptrHead == NULL || (*ptrHead)->next == NULL) return;
+
+	ListNode *cur = *ptrHead, *rest = cur->next;
+
+	RecursiveReverse(&rest);
+
+	cur->next->next = cur;
+	cur->next = NULL;
+    *ptrHead = rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
