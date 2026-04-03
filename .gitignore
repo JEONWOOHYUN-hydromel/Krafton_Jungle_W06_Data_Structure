@@ -1,5 +1,8 @@
 *
 !Data-Structures/
-!Data-Structures/**
+!Data-Structures/**/
+!Data-Structures/**/*.c
+!Data-Structures/**/*.md
+!Data-Structures/**/*.pdf
 !README.md
 !.gitignore
